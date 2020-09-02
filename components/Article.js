@@ -89,6 +89,10 @@ const data = [
   }
 ];
 
+
+
+
+
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
@@ -102,10 +106,88 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+*/
 
+
+function articleMaker(articleObj) {
+  //div
+  const article = document.createElement('div')
+  article.setAttribute('class', 'article')
+
+  //title
+  let h2 = document.createElement('h2')
+  h2.textContent = articleObj.title;
+  console.log(h2);
+  
+
+  //date
+  let dateP = document.createElement('p');
+  dateP.textContent = articleObj.date;
+  dateP.setAttribute('class', 'date');
+  console.log(dateP)
+  
+
+  //first paragraph
+  let firstP = document.createElement("p");
+  firstP.textContent = articleObj.firstParagraph;
+  firstP.setAttribute("id", "firstP");
+  console.log(firstP);
+
+
+  //second paragraph
+  let secondP = document.createElement("p");
+  secondP.textContent = articleObj.secondParagraph;
+  secondP.setAttribute("id", "secondP");
+  console.log(secondP);
+
+  //third paragraph
+  let thirdP = document.createElement("p");
+  thirdP.textContent = articleObj.thirdParagraph;
+  thirdP.setAttribute("id", "thirdP");
+  console.log(thirdP);
+
+  //span
+  
+  let span = document.createElement("span");
+  span.textContent = '+';
+  span.setAttribute("class", "expandButton");
+  
+  span.addEventListener('click', event => {
+  article.classList.toggle('article-open')
+  });
+
+
+
+  console.log(span);
+
+  article.appendChild(h2);
+  article.appendChild(dateP);
+  article.appendChild(firstP);
+  article.appendChild(secondP);
+  article.appendChild(thirdP);
+  article.appendChild(span);
+  
+  return article
+
+}
+
+const container = document.querySelector(".articles");
+
+data.forEach(artis => {
+  let newsData = articleMaker(artis)
+  container.appendChild(newsData)
+});
+
+
+articleMaker(data[0]);
+
+
+/*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
+  */
 
+  /*
   Step 3: Don't forget to return something from your function!
 
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
